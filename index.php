@@ -35,7 +35,7 @@ include('header.php');
 	</div>
 	<div class="col-md-3">
 		<div class="panel panel-default">
-			<div class="panel-heading"><strong>Número de Marcas</strong></div>
+			<div class="panel-heading"><strong>Número de Fornecedores</strong></div>
 			<div class="panel-body" align="center">
 				<h1><?php echo count_total_brand($connect); ?></h1>
 			</div>

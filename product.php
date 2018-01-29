@@ -92,17 +92,17 @@ include('header.php');
                                     <span class="input-group-addon">
                                         <select name="product_unit" id="product_unit" required>
                                             <option value="">Selecionar Unidade</option>
-                                            <option value="Bags">Saco</option>
-                                            <option value="Bottles">Garrafa</option>
-                                            <option value="Box">Caixa</option>
-                                            <option value="Dozens">Dezena</option>
-                                            <option value="Grams">Gramas</option>
-                                            <option value="Kg">Quilos</option>
-                                            <option value="Liters">Litros</option>
-                                            <option value="Meter">Metros</option>
-                                            <option value="Nos">Unidade</option>
-                                            <option value="Packet">Pacote</option>
-                                            <option value="Rolls">Rolos</option>
+                                            <option value="Saco">Saco</option>
+                                            <option value="Garrafa">Garrafa</option>
+                                            <option value="Caixa">Caixa</option>
+                                            <option value="Dezena">Dezena</option>
+                                            <option value="Gramas">Gramas</option>
+                                            <option value="Quilos">Quilos</option>
+                                            <option value="Litros">Litros</option>
+                                            <option value="Metros">Metros</option>
+                                            <option value="Unidade">Unidade</option>
+                                            <option value="Pacote">Pacote</option>
+                                            <option value="Rolos">Rolos</option>
                                         </select>
                                     </span>
                                 </div>
@@ -163,7 +163,25 @@ $(document).ready(function(){
                 "orderable":false,
             },
         ],
-        "pageLength": 10
+        "pageLength": 25,
+        "bJQueryUI": true,
+        "oLanguage": {
+            "sProcessing":   "Processando...",
+            "sLengthMenu":   "Mostrar _MENU_ registros",
+            "sZeroRecords":  "Não foram encontrados resultados",
+            "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
+            "sInfoFiltered": "",
+            "sInfoPostFix":  "",
+            "sSearch":       "Buscar:",
+            "sUrl":          "",
+            "oPaginate": {
+                "sFirst":    "Primeiro",
+                "sPrevious": "Anterior",
+                "sNext":     "Seguinte",
+                "sLast":     "Último"
+            }
+        }
     });
 
     $('#add_button').click(function(){
