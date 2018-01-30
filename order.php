@@ -39,7 +39,7 @@ include('header.php');
                             <h3 class="panel-title">Lista de Movimentações</h3>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6" align="right">
-                            <button type="button" name="add" id="add_button" class="btn btn-success btn-xs">Cadastrar Nova Movimentação</button>
+                            <button type="button" name="add" id="add_button" class="btn btn-success btn-xs">Cadastrar Movimentação</button>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ include('header.php');
                 		<thead>
 							<tr>
 								<th>#</th>
-								<th>Receptor</th>
+								<th>Recebido por</th>
 								<th>Valor total</th>
 								<th>Status do pagamento</th>
 								<th>Status</th>
@@ -83,7 +83,7 @@ include('header.php');
     					<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Nome do Receptor</label>
+									<label>Recebido por</label>
 									<input type="text" name="inventory_order_name" id="inventory_order_name" class="form-control" required />
 								</div>
 							</div>
@@ -95,7 +95,7 @@ include('header.php');
 							</div>
 						</div>
 						<div class="form-group">
-							<label>Endereço</label>
+							<label>Local</label>
 							<textarea name="inventory_order_address" id="inventory_order_address" class="form-control" required></textarea>
 						</div>
 						<div class="form-group">

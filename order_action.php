@@ -41,15 +41,27 @@ if(isset($_POST['btn_action']))
 				INSERT INTO inventory_order_product (inventory_order_id, product_id, quantity, price, tax) VALUES (:inventory_order_id, :product_id, :quantity, :price, :tax)
 				";
 				$statement = $connect->prepare($sub_query);
-				$statement->execute(
-					array(
-						':inventory_order_id'	=>	$inventory_order_id,
-						':product_id'			=>	$_POST["product_id"][$count],
-						':quantity'				=>	$_POST["quantity"][$count],
-						':price'				=>	$product_details['price'],
-						':tax'					=>	$product_details['tax']
-					)
-				);
+				if ($_POST['payment_status'] == "cash") {
+					$statement->execute(
+						array(
+							':inventory_order_id'	=>	$inventory_order_id,
+							':product_id'			=>	$_POST["product_id"][$count],
+							':quantity'				=>	-($_POST["quantity"][$count]),
+							':price'				=>	$product_details['price'],
+							':tax'					=>	$product_details['tax']
+						)
+					);
+				}else{
+					$statement->execute(
+						array(
+							':inventory_order_id'	=>	$inventory_order_id,
+							':product_id'			=>	$_POST["product_id"][$count],
+							':quantity'				=>	$_POST["quantity"][$count],
+							':price'				=>	$product_details['price'],
+							':tax'					=>	$product_details['tax']
+						)
+					);
+				}
 				$base_price = $product_details['price'] * $_POST["quantity"][$count];
 				$tax = ($base_price/100)*$product_details['tax'];
 				$total_amount = $total_amount + ($base_price + $tax);
