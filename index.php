@@ -17,7 +17,7 @@ include('header.php');
 	if($_SESSION['type'] == 'master')
 	{
 	?>
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-heading"><strong>Número de usuários</strong></div>
 			<div class="panel-body" align="center">
@@ -25,7 +25,7 @@ include('header.php');
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-heading"><strong>Numero de Categorias</strong></div>
 			<div class="panel-body" align="center">
@@ -33,19 +33,11 @@ include('header.php');
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-heading"><strong>Número de Fornecedores</strong></div>
 			<div class="panel-body" align="center">
 				<h1><?php echo count_total_brand($connect); ?></h1>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="panel panel-default">
-			<div class="panel-heading"><strong>Total em estoque</strong></div>
-			<div class="panel-body" align="center">
-				<h1><?php echo count_total_product($connect); ?></h1>
 			</div>
 		</div>
 	</div>
@@ -54,25 +46,25 @@ include('header.php');
 	?>
 		<div class="col-md-4">
 			<div class="panel panel-default">
-				<div class="panel-heading"><strong>Número das movimetações</strong></div>
+				<div class="panel-heading"><strong>Número de Produtos Ativos em Estoque</strong></div>
 				<div class="panel-body" align="center">
-					<h1>$<?php echo count_total_order_value($connect); ?></h1>
+					<h1><?php echo count_total_product($connect); ?></h1>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="panel panel-default">
-				<div class="panel-heading"><strong>Valor total das movimetações</strong></div>
+				<div class="panel-heading"><strong>Valor total das movimetações de Entrada</strong></div>
 				<div class="panel-body" align="center">
-					<h1>$<?php echo count_total_cash_order_value($connect); ?></h1>
+					<h1>R$ <?php echo count_total_cash_order_value($connect); ?></h1>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="panel panel-default">
-				<div class="panel-heading"><strong>Total Credit Order Value</strong></div>
+				<div class="panel-heading"><strong>Valor total das movimetações de Saida</strong></div>
 				<div class="panel-body" align="center">
-					<h1>$<?php echo count_total_credit_order_value($connect); ?></h1>
+					<h1>R$ <?php echo count_total_credit_order_value($connect); ?></h1>
 				</div>
 			</div>
 		</div>

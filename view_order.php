@@ -28,39 +28,39 @@ if(isset($_GET["pdf"]) && isset($_GET['order_id']))
 		$output .= '
 		<table width="100%" border="1" cellpadding="5" cellspacing="0">
 			<tr>
-				<td colspan="2" align="center" style="font-size:18px"><b>Invoice</b></td>
+				<td colspan="2" align="center" style="font-size:18px"><b>Recibo</b></td>
 			</tr>
 			<tr>
 				<td colspan="2">
 				<table width="100%" cellpadding="5">
 					<tr>
 						<td width="65%">
-							To,<br />
-							<b>RECEIVER (BILL TO)</b><br />
-							Name : '.$row["inventory_order_name"].'<br />
-							Billing Address : '.$row["inventory_order_address"].'<br />
+							<br />
+							<b>RECEBIDO POR </b><br />
+							Nome : '.$row["inventory_order_name"].'<br />
+							Local : '.$row["inventory_order_address"].'<br />
 						</td>
 						<td width="35%">
-							Reverse Charge<br />
-							Invoice No. : '.$row["inventory_order_id"].'<br />
-							Invoice Date : '.$row["inventory_order_date"].'<br />
+							<br />
+							No. : '.$row["inventory_order_id"].'<br />
+							Data : '.$row["inventory_order_date"].'<br />
 						</td>
 					</tr>
 				</table>
 				<br />
 				<table width="100%" border="1" cellpadding="5" cellspacing="0">
 					<tr>
-						<th rowspan="2">Sr No.</th>
-						<th rowspan="2">Product</th>
-						<th rowspan="2">Quantity</th>
-						<th rowspan="2">Price</th>
-						<th rowspan="2">Actual Amt.</th>
-						<th colspan="2">Tax (%)</th>
+						<th rowspan="2">#</th>
+						<th rowspan="2">Produto</th>
+						<th rowspan="2">Quantidade</th>
+						<th rowspan="2">Valor</th>
+						<th rowspan="2">Valor da Movimentação</th>
+						<th colspan="2">Taxa (%)</th>
 						<th rowspan="2">Total</th>
 					</tr>
 					<tr>
-						<th>Rate</th>
-						<th>Amt.</th>
+						<th>Porc.</th>
+						<th>Valor</th>
 					</tr>
 		';
 		$statement = $connect->prepare("
@@ -79,9 +79,11 @@ if(isset($_GET["pdf"]) && isset($_GET['order_id']))
 		$total_tax_amount = 0;
 		foreach($product_result as $sub_row)
 		{
+			if ($sub_row["quantity"] < 0) {
+
 			$count = $count + 1;
 			$product_data = fetch_product_details($sub_row['product_id'], $connect);
-			$actual_amount = $sub_row["quantity"] * $sub_row["price"];
+			$actual_amount = -($sub_row["quantity"]) * $sub_row["price"];
 			$tax_amount = ($actual_amount * $sub_row["tax"])/100;
 			$total_product_amount = $actual_amount + $tax_amount;
 			$total_actual_amount = $total_actual_amount + $actual_amount;
@@ -91,7 +93,7 @@ if(isset($_GET["pdf"]) && isset($_GET['order_id']))
 				<tr>
 					<td>'.$count.'</td>
 					<td>'.$product_data['product_name'].'</td>
-					<td>'.$sub_row["quantity"].'</td>
+					<td>'.-($sub_row["quantity"]).'</td>
 					<td aling="right">'.$sub_row["price"].'</td>
 					<td align="right">'.number_format($actual_amount, 2).'</td>
 					<td>'.$sub_row["tax"].'%</td>
@@ -99,6 +101,29 @@ if(isset($_GET["pdf"]) && isset($_GET['order_id']))
 					<td align="right">'.number_format($total_product_amount, 2).'</td>
 				</tr>
 			';
+			}else{
+				$count = $count + 1;
+				$product_data = fetch_product_details($sub_row['product_id'], $connect);
+				$actual_amount = $sub_row["quantity"] * $sub_row["price"];
+				$tax_amount = ($actual_amount * $sub_row["tax"])/100;
+				$total_product_amount = $actual_amount + $tax_amount;
+				$total_actual_amount = $total_actual_amount + $actual_amount;
+				$total_tax_amount = $total_tax_amount + $tax_amount;
+				$total = $total + $total_product_amount;
+				$output .= '
+					<tr>
+						<td>'.$count.'</td>
+						<td>'.$product_data['product_name'].'</td>
+						<td>'.$sub_row["quantity"].'</td>
+						<td aling="right">'.$sub_row["price"].'</td>
+						<td align="right">'.number_format($actual_amount, 2).'</td>
+						<td>'.$sub_row["tax"].'%</td>
+						<td align="right">'.number_format($tax_amount, 2).'</td>
+						<td align="right">'.number_format($total_product_amount, 2).'</td>
+					</tr>
+				';
+			}
+
 		}
 		$output .= '
 		<tr>
