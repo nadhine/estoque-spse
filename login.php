@@ -40,18 +40,18 @@ if(isset($_POST["login"]))
 				}
 				else
 				{
-					$message = "<label>Wrong Password</label>";
+					$message = "<label>Senha errada </label>";
 				}
 			}
 			else
 			{
-				$message = "<label>Your account is disabled, Contact Master</label>";
+				$message = "<label>Seu cadastro está desabilitado, entre em contato conosco</label>";
 			}
 		}
 	}
 	else
 	{
-		$message = "<label>Wrong Email Address</labe>";
+		$message = "<label>Endereço de email errado</labe>";
 	}
 }
 
